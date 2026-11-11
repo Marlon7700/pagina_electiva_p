@@ -91,30 +91,30 @@ export default function HeroCarousel() {
 
               {/* Slide Content Box */}
               <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end sm:justify-center pb-20 sm:pb-16 pt-16 z-20">
-                <div className="max-w-2xl space-y-4">
+                <div className="max-w-2xl w-full h-[350px] sm:h-[390px] lg:h-[420px] flex flex-col gap-4">
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md shadow-sm">
+                  <div className="h-8 shrink-0 self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md shadow-sm">
                     <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin-slow" />
                     <span>{slide.tag}</span>
                   </div>
 
                   {/* Main Title */}
-                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md">
+                  <h1 className="h-[84px] sm:h-[112px] lg:h-[144px] shrink-0 overflow-hidden text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md line-clamp-2">
                     {slide.title}
                   </h1>
 
                   {/* Subtitle & Highlight */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl">
+                  <p className="h-[72px] sm:h-[80px] lg:h-[84px] shrink-0 overflow-hidden text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl line-clamp-3">
                     {slide.subtitle}
                   </p>
 
-                  <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm sm:text-base">
+                  <div className="h-6 shrink-0 flex items-center gap-2 text-emerald-400 font-bold text-sm sm:text-base">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>{slide.highlight}</span>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <div className="h-[52px] shrink-0 pt-2 flex flex-wrap items-start gap-3">
                     <a
                       href={slide.ctaLink}
                       className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-sm sm:text-base shadow-lg hover:shadow-emerald-500/25 transition-all flex items-center gap-2 group/btn"

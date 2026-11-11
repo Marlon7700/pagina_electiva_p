@@ -60,6 +60,32 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
       >
         <div className="w-full max-w-[1536px] mx-auto px-1 sm:px-4 lg:px-8">
           <div className="relative flex min-h-16 w-full items-center justify-between gap-2 sm:gap-4 xl:gap-8 rounded-[2rem] border border-slate-200/90 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 sm:px-5 shadow-sm">
+            {/* Desktop brand shown after scrolling */}
+            <a
+              href="#inicio"
+              className={`hidden lg:flex items-center gap-2 min-w-0 px-1 transition-all duration-300 ${
+                scrolled ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 pointer-events-none'
+              }`}
+              aria-label="Inicio Bienestar Universitario"
+              tabIndex={scrolled ? 0 : -1}
+            >
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-sm shrink-0 border border-emerald-100">
+                <img
+                  src="/assets/logo-bienestar-unisimon.png"
+                  alt="Logo de Bienestar Universitario"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="leading-none text-left text-[#006837] dark:text-emerald-400">
+                <span className="block text-sm font-extrabold tracking-tight">
+                  BIENESTAR
+                </span>
+                <span className="mt-0.5 block whitespace-nowrap text-[9px] font-semibold tracking-[0.04em] text-slate-500 dark:text-slate-400">
+                  UNIVERSIDAD SIMÓN BOLÍVAR
+                </span>
+              </span>
+            </a>
+
             {/* Compact mobile brand */}
             <a
               href="#inicio"
@@ -67,8 +93,12 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
               aria-label="Inicio Bienestar Universitario"
             >
               <div className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-[#006837] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <span className="font-extrabold text-lg tracking-tighter">U</span>
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-sm shrink-0 border border-emerald-100">
+                  <img
+                    src="/assets/logo-bienestar-unisimon.png"
+                    alt="Logo de Bienestar Universitario"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <span className="min-w-0 leading-none text-[#006837] dark:text-emerald-400">
                   <span className="block text-[13px] font-extrabold tracking-tight">

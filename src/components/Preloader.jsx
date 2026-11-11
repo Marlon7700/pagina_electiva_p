@@ -35,11 +35,15 @@ export default function Preloader({ onLoaded }) {
       <div className="absolute w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
       <div className="relative flex flex-col items-center text-center p-6 max-w-sm">
-        {/* Emblem with spinning glow rings */}
+        {/* Institutional logo with spinning glow rings */}
         <div className="relative mb-6">
           <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-emerald-500 to-emerald-300 opacity-60 blur-md animate-pulse" />
-          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-2xl border border-emerald-400/40">
-            <span className="font-extrabold text-4xl tracking-tighter">U</span>
+          <div className="relative w-24 h-24 rounded-2xl bg-white flex items-center justify-center overflow-hidden shadow-2xl border border-emerald-400/40">
+            <img
+              src="/assets/logo-bienestar-unisimon.png"
+              alt="Logo de Bienestar Universitario"
+              className="w-full h-full object-contain"
+            />
           </div>
           {/* Subtle spinning ring */}
           <div className="absolute -inset-2 border-2 border-dashed border-emerald-400/40 rounded-3xl animate-spin-slow pointer-events-none" />
