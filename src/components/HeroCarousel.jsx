@@ -1,32 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  ChevronLeft, ChevronRight, Pause, Play, Sparkles, 
-  ArrowRight, Phone, ExternalLink 
+  Sparkles, ArrowRight
 } from 'lucide-react';
 import { carouselSlides } from '../data/carouselSlides';
 
 export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const autoPlayRef = useRef(null);
 
-  // Auto-advance every 5000ms (5 seconds)
+  // Auto-advance every 5000ms (5 seconds), without requiring visible controls.
   useEffect(() => {
-    if (isPlaying) {
-      autoPlayRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselSlides.length);
-      }, 5000);
-    }
+    autoPlayRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselSlides.length);
+    }, 5000);
+
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
-  }, [isPlaying, currentIndex]);
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? carouselSlides.length - 1 : prev - 1));
@@ -58,14 +51,10 @@ export default function HeroCarousel() {
     }
   };
 
-  const currentSlide = carouselSlides[currentIndex];
-
   return (
     <section 
       id="inicio"
       className="relative w-full overflow-hidden bg-slate-900 text-white select-none group"
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -149,79 +138,6 @@ export default function HeroCarousel() {
           );
         })}
 
-        {/* Carousel Navigation Arrows */}
-        <button
-          onClick={handlePrev}
-          aria-label="Foto anterior"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-emerald-600/80 text-white backdrop-blur-md border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-110 focus:outline-none"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-
-        <button
-          onClick={handleNext}
-          aria-label="Siguiente foto"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-emerald-600/80 text-white backdrop-blur-md border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-110 focus:outline-none"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-
-        {/* Bottom Carousel Controls Bar (5s Progress Bar + Thumbnails Dots + Play/Pause) */}
-        <div className="absolute bottom-4 inset-x-0 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-black/40 backdrop-blur-md rounded-2xl py-2.5 px-4 border border-white/10">
-            {/* Slide Indicators with 5-Second Timer Bar */}
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
-              {carouselSlides.map((slide, index) => {
-                const isActive = index === currentIndex;
-                return (
-                  <button
-                    key={slide.id}
-                    onClick={() => goToSlide(index)}
-                    aria-label={`Ir a la diapositiva ${index + 1}`}
-                    className={`group relative h-2.5 sm:h-3 rounded-full transition-all overflow-hidden ${
-                      isActive ? 'w-12 sm:w-16 bg-white/30' : 'w-3 sm:w-3.5 bg-white/20 hover:bg-white/40'
-                    }`}
-                  >
-                    {isActive && isPlaying && (
-                      <div 
-                        key={`${currentIndex}-${isPlaying}`}
-                        className="h-full bg-emerald-400 rounded-full animate-progress-5s"
-                      />
-                    )}
-                    {isActive && !isPlaying && (
-                      <div className="h-full bg-amber-400 rounded-full w-full" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Slide Info & Play/Pause Button */}
-            <div className="flex items-center gap-3 text-xs text-slate-300">
-              <span className="font-semibold">
-                <span className="text-emerald-400">{currentIndex + 1}</span> / {carouselSlides.length}
-              </span>
-              <span className="text-slate-500">|</span>
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white font-medium"
-                title={isPlaying ? 'Pausar rotación automática' : 'Reanudar rotación automática'}
-              >
-                {isPlaying ? (
-                  <>
-                    <Pause className="w-3.5 h-3.5 text-amber-300" />
-                    <span className="hidden sm:inline">Pausar (5s)</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="hidden sm:inline">Reanudar</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -54,49 +54,40 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
       <nav 
         className={`sticky top-0 z-40 ${
           scrolled 
-            ? 'bg-white/95 dark:bg-slate-900/95 shadow-md py-2 border-b border-slate-200 dark:border-slate-800' 
-            : 'bg-white dark:bg-slate-900 py-2.5 border-b border-slate-200/80 dark:border-slate-800'
+            ? 'bg-white/95 dark:bg-slate-900/95 py-2' 
+            : 'bg-white dark:bg-slate-900 py-2.5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Left side on mobile: Hamburger Menu button */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsOpen(true)}
-                className="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none"
-                aria-label="Abrir menú de navegación lateral"
-              >
-                <Menu className="w-5 h-5 text-[#006837] dark:text-emerald-400" />
-              </button>
-
-              {/* Brand Logo & Name */}
-              <a 
-                href="#inicio" 
-                className="flex items-center gap-2.5 group"
-                aria-label="Inicio Bienestar Universitario"
-              >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#006837] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <span className="font-extrabold text-lg sm:text-xl tracking-tighter">U</span>
+        <div className="w-full max-w-[1536px] mx-auto px-1 sm:px-4 lg:px-8">
+          <div className="relative flex min-h-16 w-full items-center justify-between gap-2 sm:gap-4 xl:gap-8 rounded-[2rem] border border-slate-200/90 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 sm:px-5 shadow-sm">
+            {/* Compact mobile brand */}
+            <a
+              href="#inicio"
+              className="lg:hidden min-w-0 flex flex-1 items-center gap-2 px-1.5"
+              aria-label="Inicio Bienestar Universitario"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-9 h-9 rounded-xl bg-[#006837] flex items-center justify-center text-white shadow-sm shrink-0">
+                  <span className="font-extrabold text-lg tracking-tighter">U</span>
                 </div>
-                <div className="flex flex-col text-left">
-                  <span className="font-extrabold text-sm sm:text-base tracking-tight text-[#006837] dark:text-emerald-400 leading-none">
+                <span className="min-w-0 leading-none text-[#006837] dark:text-emerald-400">
+                  <span className="block text-[13px] font-extrabold tracking-tight">
                     BIENESTAR
                   </span>
-                  <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
-                    Universidad Simón Bolívar
+                  <span className="mt-0.5 block whitespace-nowrap text-[8px] font-semibold tracking-[0.04em] text-slate-500 dark:text-slate-400">
+                    UNIVERSIDAD SIMÓN BOLÍVAR
                   </span>
-                </div>
-              </a>
-            </div>
+                </span>
+              </div>
+            </a>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            <div className="pointer-events-none absolute inset-0 hidden items-center justify-center gap-1 lg:flex lg:-translate-x-[3.5rem] xl:gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+                  className={`pointer-events-auto whitespace-nowrap px-2.5 xl:px-3 py-2 rounded-lg text-[13px] xl:text-sm font-semibold transition-colors flex items-center gap-1 ${
                     link.isEmergency
                       ? 'text-amber-800 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-50 dark:hover:bg-amber-950/40'
                       : 'text-slate-700 dark:text-slate-200 hover:text-[#006837] dark:hover:text-emerald-400 hover:bg-emerald-50/70 dark:hover:bg-slate-800'
@@ -111,11 +102,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
             </div>
 
             {/* Right Action Buttons */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="absolute right-2 sm:right-5 flex items-center gap-1.5 sm:gap-2.5 shrink-0">
               {/* Dark Mode Instant Switcher */}
               <button
                 onClick={handleToggleTheme}
-                className="p-2 rounded-xl text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 cursor-pointer"
+                className="shrink-0 p-2.5 rounded-xl text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 cursor-pointer"
                 title={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
                 aria-label="Alternar modo oscuro o claro"
               >
@@ -126,9 +117,30 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
                 )}
               </button>
 
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsOpen((open) => !open)}
+                className="lg:hidden relative shrink-0 p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none transition-transform duration-300 active:scale-95"
+                aria-label={isOpen ? 'Cerrar menú de navegación lateral' : 'Abrir menú de navegación lateral'}
+                aria-expanded={isOpen}
+              >
+                <span className="relative block w-5 h-5">
+                  <Menu
+                    className={`absolute inset-0 w-5 h-5 text-[#006837] dark:text-emerald-400 transition-all duration-300 ${
+                      isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
+                    }`}
+                  />
+                  <X
+                    className={`absolute inset-0 w-5 h-5 text-[#006837] dark:text-emerald-400 transition-all duration-300 ${
+                      isOpen ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
+                    }`}
+                  />
+                </span>
+              </button>
+
               <button
                 onClick={onOpenPoster}
-                className="hidden md:flex px-3 py-1.5 rounded-xl text-xs font-semibold border border-[#006837]/40 text-[#006837] dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 items-center gap-1.5 cursor-pointer"
+                className="hidden md:flex min-h-10 px-3.5 rounded-xl text-xs font-semibold border border-[#006837]/40 text-[#006837] dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 items-center justify-center gap-1.5 cursor-pointer text-center leading-tight"
                 title="Ver afiche oficial del Directorio"
               >
                 <BookOpen className="w-3.5 h-3.5" />
@@ -137,11 +149,10 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPoster, onOpenAppo
 
               <button
                 onClick={onOpenAppointment}
-                className="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#006837] hover:bg-[#00552d] shadow-sm flex items-center gap-1.5 cursor-pointer"
+                className="min-h-10 px-2.5 sm:px-4 rounded-xl text-xs font-bold text-white bg-[#006837] hover:bg-[#00552d] shadow-sm flex items-center justify-center gap-1.5 cursor-pointer text-center leading-tight whitespace-nowrap"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
                 <span className="hidden sm:inline">Solicitar Orientación</span>
-                <span className="sm:hidden">Orientación</span>
               </button>
             </div>
           </div>
