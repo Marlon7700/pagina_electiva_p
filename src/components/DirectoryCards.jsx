@@ -52,6 +52,7 @@ export default function DirectoryCards({ onSelectArea }) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
+        <Reveal>
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 mb-4">
             <Building2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -70,9 +71,11 @@ export default function DirectoryCards({ onSelectArea }) {
             "{generalContact.highlight}"
           </p>
         </div>
+        </Reveal>
 
         {/* General Reception Contact Card Banner */}
-        <div className="glass-card rounded-2xl p-6 mb-10 border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 via-white dark:via-slate-800/80 to-emerald-500/5 shadow-md">
+        <Reveal>
+        <div className="glass-card tarjeta-3d rounded-2xl p-6 mb-10 border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 via-white dark:via-slate-800/80 to-emerald-500/5 shadow-md">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/30">
@@ -85,7 +88,7 @@ export default function DirectoryCards({ onSelectArea }) {
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                   Atención General y Orientación al Usuario
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                   {generalContact.attentionHours}
                 </p>
               </div>
@@ -110,6 +113,7 @@ export default function DirectoryCards({ onSelectArea }) {
             </div>
           </div>
         </div>
+        </Reveal>
 
         {/* Search Bar & Area Filter Buttons */}
         <div className="mb-8 space-y-4">
@@ -163,13 +167,12 @@ export default function DirectoryCards({ onSelectArea }) {
         {/* Directory Cards Grid */}
         <div id="areas" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAreas.map((area) => (
+            <Reveal key={area.id} className="h-full">
             <div
-              key={area.id}
-              className={`glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between border-t-4 transition-all ${area.accentBorder}`}
+              className={`glass-card glass-card-hover tarjeta-3d rounded-2xl p-6 flex flex-col justify-between border-t-4 transition-all h-full ${area.accentBorder}`}
               style={{ borderTopColor: area.color }}
             >
               <div>
-                <Reveal>
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div 
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md"
@@ -182,37 +185,29 @@ export default function DirectoryCards({ onSelectArea }) {
                     {area.highlightTag}
                   </span>
                 </div>
-                </Reveal>
 
-                <Reveal>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 leading-snug">
                   {area.name}
                 </h3>
-                </Reveal>
-                <Reveal>
-                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
                   {area.shortDesc}
                 </p>
-                </Reveal>
 
-                <Reveal>
                 <div className="mb-5 bg-slate-50/70 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-100 dark:border-slate-800">
                   <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2">
                     Servicios Destacados
                   </span>
                   <ul className="space-y-1.5">
                     {area.services.slice(0, 3).map((svc, i) => (
-                      <li key={i} className="text-sm text-slate-600 dark:text-slate-300 flex items-start gap-1.5">
+                      <li key={i} className="text-base text-slate-600 dark:text-slate-300 flex items-start gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: area.color }} />
                         <span>{svc}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                </Reveal>
 
-                <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-sm">
-                  <Reveal>
+                <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-base">
                   <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/80">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <Mail className="w-4 h-4 text-slate-400 shrink-0" />
@@ -236,9 +231,7 @@ export default function DirectoryCards({ onSelectArea }) {
                       )}
                     </button>
                   </div>
-                  </Reveal>
 
-                  <Reveal>
                   <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/80">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <Phone className="w-4 h-4 text-slate-400 shrink-0" />
@@ -259,10 +252,8 @@ export default function DirectoryCards({ onSelectArea }) {
                       Llamar
                     </a>
                   </div>
-                  </Reveal>
 
                   {area.whatsapp && (
-                    <Reveal>
                     <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50">
                       <div className="flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -279,10 +270,8 @@ export default function DirectoryCards({ onSelectArea }) {
                         Chatear
                       </a>
                     </div>
-                    </Reveal>
                   )}
 
-                  <Reveal>
                   <div className="flex items-start gap-2 p-2 text-slate-500 dark:text-slate-400">
                     <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                     <div>
@@ -294,23 +283,21 @@ export default function DirectoryCards({ onSelectArea }) {
                       </span>
                     </div>
                   </div>
-                  </Reveal>
                 </div>
               </div>
 
-              <Reveal>
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectArea(area)}
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white shadow-sm hover:shadow"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all text-white shadow-sm hover:shadow"
                   style={{ backgroundColor: area.color }}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Conocer más de {area.name}</span>
                 </button>
               </div>
-              </Reveal>
             </div>
+            </Reveal>
           ))}
         </div>
 

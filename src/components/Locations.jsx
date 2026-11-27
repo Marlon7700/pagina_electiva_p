@@ -50,6 +50,7 @@ export default function Locations() {
     <section id="sedes" className="py-16 sm:py-20 bg-slate-100/70 dark:bg-slate-950 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <Reveal>
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 mb-4">
             <Compass className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -64,13 +65,14 @@ export default function Locations() {
             Encuéntranos en los diferentes puntos estratégicos del campus universitario de la Universidad Simón Bolívar en Barranquilla.
           </p>
         </div>
+        </Reveal>
 
         {/* Location Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {locations.map((loc, i) => (
             <Reveal key={i} className="h-full">
             <div
-              className="glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all flex flex-col sm:flex-row group h-full"
+              className="glass-card tarjeta-3d rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all flex flex-col sm:flex-row group h-full"
             >
               {/* Image side */}
               <div className="sm:w-2/5 relative h-48 sm:h-auto overflow-hidden bg-slate-900">
@@ -91,11 +93,11 @@ export default function Locations() {
                   <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                     {loc.badge}
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                     {loc.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 dark:text-slate-300 flex items-start gap-1.5 mb-3">
+                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 flex items-start gap-1.5 mb-3">
                     <MapPin className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <span>{loc.address}</span>
                   </p>
@@ -114,7 +116,7 @@ export default function Locations() {
                     ))}
                   </div>
 
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                     <span>{loc.hours}</span>
                   </p>

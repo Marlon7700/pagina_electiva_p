@@ -1,5 +1,6 @@
 import React from 'react';
-import { Building2, MapPin, Sparkles, Phone, ArrowDown, HeartPulse, Award } from 'lucide-react';
+import { Building2, MapPin, Sparkles, ArrowDown } from 'lucide-react';
+import Reveal from './Reveal';
 
 export default function BuildingHeroHighlight({ onOpenAppointment }) {
   return (
@@ -24,40 +25,47 @@ export default function BuildingHeroHighlight({ onOpenAppointment }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Text & Values */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <Reveal>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 backdrop-blur-md">
               <Building2 className="w-4 h-4 text-emerald-400" />
               <span>Casa de Bienestar Universitario • Sede 2</span>
             </div>
+            </Reveal>
 
+            <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
               Un Espacio Diseñado Para Tu <span className="text-emerald-400">Bienestar y Crecimiento</span>
             </h2>
+            </Reveal>
 
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl">
+            <Reveal>
+            <p className="text-lg sm:text-xl text-slate-200 leading-relaxed font-normal max-w-2xl">
               Nuestra emblemática sede de Bienestar Universitario te abre sus puertas. Aquí convergen la atención médica preventiva, el apoyo psicológico confidencial, el fomento del deporte y la riqueza cultural del Caribe colombiano.
             </p>
+            </Reveal>
 
             {/* Quick Metrics / Stats Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
+              <Reveal><div className="tarjeta-3d p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
                 <span className="text-2xl sm:text-3xl font-black text-emerald-400 block font-mono">5</span>
-                <span className="text-[11px] font-semibold text-slate-300 uppercase">Áreas Clave</span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
+                <span className="text-xs sm:text-sm font-semibold text-slate-300 uppercase">Áreas Clave</span>
+              </div></Reveal>
+              <Reveal><div className="tarjeta-3d p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
                 <span className="text-2xl sm:text-3xl font-black text-amber-300 block font-mono">24/7</span>
-                <span className="text-[11px] font-semibold text-slate-300 uppercase">Línea Amiga</span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
+                <span className="text-xs sm:text-sm font-semibold text-slate-300 uppercase">Línea Amiga</span>
+              </div></Reveal>
+              <Reveal><div className="tarjeta-3d p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
                 <span className="text-2xl sm:text-3xl font-black text-sky-400 block font-mono">100%</span>
-                <span className="text-[11px] font-semibold text-slate-300 uppercase">Gratuito</span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
+                <span className="text-xs sm:text-sm font-semibold text-slate-300 uppercase">Gratuito</span>
+              </div></Reveal>
+              <Reveal><div className="tarjeta-3d p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
                 <span className="text-2xl sm:text-3xl font-black text-rose-400 block font-mono">+20</span>
-                <span className="text-[11px] font-semibold text-slate-300 uppercase">Disciplinas</span>
-              </div>
+                <span className="text-xs sm:text-sm font-semibold text-slate-300 uppercase">Disciplinas</span>
+              </div></Reveal>
             </div>
 
             {/* CTA Buttons */}
+            <Reveal>
             <div className="pt-2 flex flex-wrap items-center gap-3 justify-center lg:justify-start">
               <a
                 href="#directorio"
@@ -75,11 +83,13 @@ export default function BuildingHeroHighlight({ onOpenAppointment }) {
                 <span>Solicitar Consulta</span>
               </button>
             </div>
+            </Reveal>
           </div>
 
           {/* Right Column: Visual Frame of the Building with interactive pin */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-md rounded-3xl overflow-hidden p-2 bg-gradient-to-tr from-emerald-500/40 via-white/20 to-amber-500/30 backdrop-blur-xl shadow-2xl border border-white/20 group">
+          <Reveal className="lg:col-span-5">
+          <div>
+            <div className="tarjeta-3d relative mx-auto max-w-md rounded-3xl overflow-hidden p-2 bg-gradient-to-tr from-emerald-500/40 via-white/20 to-amber-500/30 backdrop-blur-xl shadow-2xl border border-white/20 group">
               <div className="relative rounded-2xl overflow-hidden aspect-4/3 sm:aspect-square">
                 <img
                   src="/assets/bienestar-building-bg.webp"
@@ -92,15 +102,16 @@ export default function BuildingHeroHighlight({ onOpenAppointment }) {
                 <div className="absolute bottom-4 inset-x-4 p-3.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/15 text-xs text-white">
                   <div className="flex items-center gap-2 mb-1">
                     <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span className="font-bold text-sm">Casa de Bienestar Sede 2</span>
+                    <span className="font-bold text-base">Casa de Bienestar Sede 2</span>
                   </div>
-                  <p className="text-[11px] text-slate-300">
+                  <p className="text-sm text-slate-300">
                     Carrera 54 No. 64 - 223, Barranquilla • Atención presencial
                   </p>
                 </div>
               </div>
             </div>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

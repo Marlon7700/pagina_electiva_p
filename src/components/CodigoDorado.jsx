@@ -43,7 +43,7 @@ export default function CodigoDorado() {
         {/* Banner Card */}
         <div className="glass-card rounded-3xl p-6 sm:p-10 border-2 border-amber-400/50 shadow-xl bg-white/95 dark:bg-slate-900/95">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-10">
-            <div className="space-y-4 max-w-2xl text-center lg:text-left">
+            <Reveal className="space-y-4 max-w-2xl text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500 text-white shadow-sm">
                 <ShieldAlert className="w-4 h-4 animate-bounce" />
                 <span>Protocolo de Emergencia en Salud Mental</span>
@@ -68,11 +68,11 @@ export default function CodigoDorado() {
                   Casa de Bienestar Sede 2
                 </span>
               </div>
-            </div>
+            </Reveal>
 
             {/* Direct Emergency Call Box */}
             <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3">
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg text-center">
+              <Reveal><div className="tarjeta-3d p-5 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg text-center">
                 <span className="text-xs uppercase tracking-widest font-bold opacity-90 block mb-1">
                   Línea Código Dorado
                 </span>
@@ -84,9 +84,9 @@ export default function CodigoDorado() {
                   <span>315 3778669</span>
                 </a>
                 <span className="text-[11px] opacity-80 block mt-1">Llamada y WhatsApp de Urgencia</span>
-              </div>
+              </div></Reveal>
 
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-700 text-white shadow-lg text-center">
+              <Reveal><div className="tarjeta-3d p-4 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-700 text-white shadow-lg text-center">
                 <span className="text-xs uppercase tracking-widest font-bold opacity-90 block mb-1">
                   Línea Amiga Bienestar
                 </span>
@@ -98,7 +98,7 @@ export default function CodigoDorado() {
                   <span>317 2163682</span>
                 </a>
                 <span className="text-[11px] opacity-80 block mt-1">Apoyo y escucha activa</span>
-              </div>
+              </div></Reveal>
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export default function CodigoDorado() {
             {steps.map((st) => (
               <Reveal key={st.num} className="h-full">
               <div 
-                className="p-5 rounded-2xl bg-amber-50/50 dark:bg-slate-800/80 border border-amber-200/80 dark:border-slate-700 relative overflow-hidden group hover:border-amber-400 transition-colors h-full"
+                className="tarjeta-3d p-5 rounded-2xl bg-amber-50/50 dark:bg-slate-800/80 border border-amber-200/80 dark:border-slate-700 relative overflow-hidden group hover:border-amber-400 transition-colors h-full"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-2xl font-black text-amber-500 dark:text-amber-400 font-mono">
@@ -117,10 +117,10 @@ export default function CodigoDorado() {
                     {st.badge}
                   </span>
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-1.5">
+                <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-1.5">
                   {st.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                   {st.desc}
                 </p>
               </div>

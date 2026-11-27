@@ -11,7 +11,7 @@ function playNext() {
   window.setTimeout(() => {
     busy = false;
     playNext();
-  }, 420);
+  }, 80);
 }
 
 function enqueue(el, show) {
@@ -42,7 +42,7 @@ export default function Reveal({ children, className = '' }) {
           if (alive) setVisible(true);
         });
       },
-      { threshold: 0.25, rootMargin: '0px 0px -48px 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
     );
 
     observer.observe(el);

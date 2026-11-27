@@ -60,6 +60,7 @@ export default function SocialSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <Reveal>
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 mb-4">
             <Share2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -74,6 +75,7 @@ export default function SocialSection() {
             Conéctate con nosotros en Instagram, Facebook y TikTok. Entérate de convocatorias de becas, torneos deportivos, festivales de folclor, pausas activas y tips de bienestar.
           </p>
         </div>
+        </Reveal>
 
         {/* Social Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -82,7 +84,7 @@ export default function SocialSection() {
             return (
               <Reveal key={social.id} className="h-full">
               <div
-                className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 relative group overflow-hidden h-full"
+                className="glass-card glass-card-hover tarjeta-3d rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 relative group overflow-hidden h-full"
               >
                 {/* Top glow accent */}
                 <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${social.gradient}`} />
@@ -121,7 +123,7 @@ export default function SocialSection() {
                     </button>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                     {social.tagline}
                   </p>
                 </div>
