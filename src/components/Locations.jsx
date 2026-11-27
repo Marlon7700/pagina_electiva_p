@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Navigation, Clock, Building, Compass, ExternalLink } from 'lucide-react';
+import Reveal from './Reveal';
 
 export default function Locations() {
   const locations = [
@@ -67,9 +68,9 @@ export default function Locations() {
         {/* Location Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {locations.map((loc, i) => (
+            <Reveal key={i} className="h-full">
             <div
-              key={i}
-              className="glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all flex flex-col sm:flex-row group"
+              className="glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all flex flex-col sm:flex-row group h-full"
             >
               {/* Image side */}
               <div className="sm:w-2/5 relative h-48 sm:h-auto overflow-hidden bg-slate-900">
@@ -132,6 +133,7 @@ export default function Locations() {
                 </div>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -5,6 +5,7 @@ import {
   Palette, GraduationCap, ShieldCheck, Sparkles, Building2
 } from 'lucide-react';
 import { generalContact, directoryAreas } from '../data/directoryData';
+import Reveal from './Reveal';
 
 export default function DirectoryCards({ onSelectArea }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -168,7 +169,7 @@ export default function DirectoryCards({ onSelectArea }) {
               style={{ borderTopColor: area.color }}
             >
               <div>
-                {/* Header: Icon & Badge */}
+                <Reveal>
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div 
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md"
@@ -177,37 +178,41 @@ export default function DirectoryCards({ onSelectArea }) {
                     {getAreaIcon(area.icon)}
                   </div>
 
-                  <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${area.badgeColor}`}>
+                  <span className={`text-xs sm:text-sm font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${area.badgeColor}`}>
                     {area.highlightTag}
                   </span>
                 </div>
+                </Reveal>
 
-                {/* Title & Description */}
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 leading-snug">
+                <Reveal>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 leading-snug">
                   {area.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
+                </Reveal>
+                <Reveal>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
                   {area.shortDesc}
                 </p>
+                </Reveal>
 
-                {/* Key Services List */}
+                <Reveal>
                 <div className="mb-5 bg-slate-50/70 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-100 dark:border-slate-800">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2">
                     Servicios Destacados
                   </span>
                   <ul className="space-y-1.5">
                     {area.services.slice(0, 3).map((svc, i) => (
-                      <li key={i} className="text-xs text-slate-600 dark:text-slate-300 flex items-start gap-1.5">
+                      <li key={i} className="text-sm text-slate-600 dark:text-slate-300 flex items-start gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: area.color }} />
                         <span>{svc}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
+                </Reveal>
 
-                {/* Contact Rows */}
-                <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
-                  {/* Email */}
+                <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-sm">
+                  <Reveal>
                   <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/80">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <Mail className="w-4 h-4 text-slate-400 shrink-0" />
@@ -231,8 +236,9 @@ export default function DirectoryCards({ onSelectArea }) {
                       )}
                     </button>
                   </div>
+                  </Reveal>
 
-                  {/* Phone */}
+                  <Reveal>
                   <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/80">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <Phone className="w-4 h-4 text-slate-400 shrink-0" />
@@ -243,19 +249,20 @@ export default function DirectoryCards({ onSelectArea }) {
                         >
                           {area.phone}
                         </a>
-                        <span className="text-[10px] text-slate-400 block">{area.phoneLabel}</span>
+                        <span className="text-xs text-slate-400 block">{area.phoneLabel}</span>
                       </div>
                     </div>
                     <a
                       href={`tel:${area.phone.replace(/\s+/g, '')}`}
-                      className="px-2 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-[10px] font-bold hover:bg-emerald-600 hover:text-white transition-colors"
+                      className="px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-emerald-600 hover:text-white transition-colors"
                     >
                       Llamar
                     </a>
                   </div>
+                  </Reveal>
 
-                  {/* WhatsApp if available */}
                   {area.whatsapp && (
+                    <Reveal>
                     <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50">
                       <div className="flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -267,39 +274,42 @@ export default function DirectoryCards({ onSelectArea }) {
                         href={`https://wa.me/${area.whatsapp}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2.5 py-1 rounded-md bg-emerald-600 text-white text-[10px] font-bold hover:bg-emerald-700 transition-colors"
+                        className="px-2.5 py-1 rounded-md bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-colors"
                       >
                         Chatear
                       </a>
                     </div>
+                    </Reveal>
                   )}
 
-                  {/* Location */}
+                  <Reveal>
                   <div className="flex items-start gap-2 p-2 text-slate-500 dark:text-slate-400">
                     <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="font-semibold text-slate-700 dark:text-slate-200 block">
                         {area.location}
                       </span>
-                      <span className="text-[11px] text-slate-400 block">
+                      <span className="text-sm text-slate-400 block">
                         {area.locationDetail}
                       </span>
                     </div>
                   </div>
+                  </Reveal>
                 </div>
               </div>
 
-              {/* Bottom Card Action */}
+              <Reveal>
               <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectArea(area)}
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all text-white shadow-sm hover:shadow"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white shadow-sm hover:shadow"
                   style={{ backgroundColor: area.color }}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Conocer más de {area.name}</span>
                 </button>
               </div>
+              </Reveal>
             </div>
           ))}
         </div>

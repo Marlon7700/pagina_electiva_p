@@ -90,6 +90,26 @@
   animation: progress5s 5s linear forwards;
 }
 
+.reveal-item {
+  opacity: 0;
+  transform: translateY(-36px);
+}
+
+.reveal-item.is-visible {
+  animation: bajarUno 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes bajarUno {
+  from {
+    opacity: 0;
+    transform: translateY(-36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Institutional Clean Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

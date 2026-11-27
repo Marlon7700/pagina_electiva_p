@@ -3,6 +3,7 @@ import {
   Share2, ExternalLink, Sparkles, Check, Copy, Heart, MessageCircle 
 } from 'lucide-react';
 import { InstagramIcon, FacebookIcon, TikTokIcon } from './SocialIcons';
+import Reveal from './Reveal';
 
 export default function SocialSection() {
   const [copiedHandle, setCopiedHandle] = React.useState(null);
@@ -79,9 +80,9 @@ export default function SocialSection() {
           {socials.map((social) => {
             const Icon = social.icon;
             return (
+              <Reveal key={social.id} className="h-full">
               <div
-                key={social.id}
-                className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 relative group overflow-hidden"
+                className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 relative group overflow-hidden h-full"
               >
                 {/* Top glow accent */}
                 <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${social.gradient}`} />
@@ -138,6 +139,7 @@ export default function SocialSection() {
                   </a>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>

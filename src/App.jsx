@@ -66,16 +66,16 @@ export default function App() {
           <HeroCarousel />
 
           {/* 4. Building Architecture Hero Highlight with Wave Motif & Background */}
-          <BuildingHeroHighlight 
+          <BuildingHeroHighlight
             onOpenAppointment={() => {
               setSelectedArea(null);
               setIsAppointmentOpen(true);
-            }} 
+            }}
           />
 
           {/* 5. Directorio de Bienestar Universitario (5 Areas, Search, Copy, Call & WhatsApp) */}
-          <DirectoryCards 
-            onSelectArea={(area) => setSelectedArea(area)} 
+          <DirectoryCards
+            onSelectArea={(area) => setSelectedArea(area)}
           />
 
           {/* 6. Protocolo Código Dorado & Salud Mental (Líneas 315 3778669 y 317 2163682) */}

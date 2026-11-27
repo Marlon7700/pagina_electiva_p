@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
-  ImageIcon, Sparkles, Filter, X, ZoomIn, 
-  ExternalLink, Calendar, Info 
+  ImageIcon, X, ZoomIn, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { galleryItems } from '../data/campusGallery';
 
 export default function CampusGallery() {
   const [activeCategory, setActiveCategory] = useState('Todas');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState(true);
+  const [paused, setPaused] = useState(false);
+  const [cycle, setCycle] = useState(0);
+  const [step, setStep] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const categories = [
     'Todas',
@@ -22,6 +28,81 @@ export default function CampusGallery() {
   const filteredItems = activeCategory === 'Todas'
     ? galleryItems
     : galleryItems.filter(item => item.category === activeCategory);
+
+  const count = filteredItems.length;
+  const slides = count > 1
+    ? [...filteredItems, filteredItems[0], filteredItems[1] ?? filteredItems[0]]
+    : filteredItems;
+
+  useEffect(() => {
+    setAnimate(false);
+    setIndex(0);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    if (animate) return undefined;
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setAnimate(true));
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [animate, index]);
+
+  useEffect(() => {
+    if (count <= 1 || index < count) return undefined;
+    const timer = window.setTimeout(() => {
+      setAnimate(false);
+      setIndex(0);
+    }, 700);
+    return () => window.clearTimeout(timer);
+  }, [index, count]);
+
+  useEffect(() => {
+    if (count <= 1 || paused || selectedImage) return undefined;
+    const timer = window.setInterval(() => {
+      setIndex((current) => current + 1);
+      setStep((current) => current + 1);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [count, activeCategory, paused, selectedImage, cycle]);
+
+  const goNext = () => {
+    setIndex((current) => current + 1);
+    setStep((current) => current + 1);
+    setCycle((current) => current + 1);
+  };
+
+  const goPrev = () => {
+    setCycle((current) => current + 1);
+    setStep((current) => current + 1);
+    if (index === 0 && count > 1) {
+      setAnimate(false);
+      setIndex(count);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          setAnimate(true);
+          setIndex(count - 1);
+        });
+      });
+      return;
+    }
+    setIndex((current) => Math.max(0, current - 1));
+  };
+
+  const handleTouchStart = (event) => {
+    setTouchEnd(null);
+    setTouchStart(event.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (event) => {
+    setTouchEnd(event.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart == null || touchEnd == null) return;
+    const distance = touchStart - touchEnd;
+    if (distance > 50) goNext();
+    else if (distance < -50) goPrev();
+  };
 
   return (
     <section id="galeria" className="py-16 sm:py-20 bg-white dark:bg-slate-950 transition-colors">
@@ -59,13 +140,46 @@ export default function CampusGallery() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredItems.map((item) => (
+        {/* Carrusel horizontal: siempre dos columnas, avanza de lado */}
+        <div
+          className="relative"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {count > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Imagen anterior"
+                className="absolute left-1 sm:left-2 top-[28%] z-10 p-2 rounded-full bg-white/90 dark:bg-slate-900/80 text-slate-800 dark:text-white shadow-md border border-slate-200 dark:border-slate-700 hover:bg-emerald-600 hover:text-white"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Imagen siguiente"
+                className="absolute right-1 sm:right-2 top-[28%] z-10 p-2 rounded-full bg-white/90 dark:bg-slate-900/80 text-slate-800 dark:text-white shadow-md border border-slate-200 dark:border-slate-700 hover:bg-emerald-600 hover:text-white"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
+          <div className="overflow-hidden">
             <div
-              key={item.id}
+              className={`flex w-full ${animate ? 'transition-transform duration-700 ease-out' : ''}`}
+              style={{ transform: `translateX(-${index * 50}%)` }}
+            >
+          {slides.map((item, slideIndex) => (
+            <div key={`${item.id}-${slideIndex}`} className="px-2" style={{ flex: '0 0 50%' }}>
+            <div
               onClick={() => setSelectedImage(item)}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              className="group relative cursor-pointer overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-xs hover:shadow-xl flex flex-col justify-between h-full"
             >
               {/* Image Container */}
               <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-slate-900/10 dark:bg-slate-900/60 flex items-center justify-center">
@@ -99,17 +213,49 @@ export default function CampusGallery() {
                   <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                     {item.badge}
                   </span>
-                  <h3 className="font-bold text-slate-900 dark:text-white text-sm line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-base sm:text-lg line-clamp-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">
+                  <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 line-clamp-3 mt-1">
                     {item.desc}
                   </p>
                 </div>
               </div>
             </div>
+            </div>
           ))}
+            </div>
+          </div>
         </div>
+
+        {count > 1 && (
+          <div className="max-w-md mx-auto mt-6">
+            <p className="text-center text-sm text-slate-500 dark:text-slate-400 mb-3">
+              El carrusel avanza cada 5 segundos · {(index % count) + 1} de {count}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 mb-3">
+              {filteredItems.map((item, dotIndex) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-label={`Ir a la imagen ${dotIndex + 1}`}
+                  onClick={() => {
+                    setAnimate(true);
+                    setIndex(dotIndex);
+                    setStep((current) => current + 1);
+                    setCycle((current) => current + 1);
+                  }}
+                  className={`h-2 rounded-full transition-all ${
+                    dotIndex === index % count ? 'w-6 bg-emerald-600' : 'w-2 bg-slate-300 dark:bg-slate-700'
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+              <div key={step} className="h-full bg-emerald-600 animate-progress-5s" />
+            </div>
+          </div>
+        )}
 
         {/* Lightbox Modal */}
         {selectedImage && (

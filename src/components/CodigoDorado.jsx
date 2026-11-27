@@ -3,6 +3,7 @@ import {
   ShieldAlert, Phone, HeartHandshake, AlertCircle, 
   Clock, MapPin, CheckCircle2, ChevronRight, HeartPulse 
 } from 'lucide-react';
+import Reveal from './Reveal';
 
 export default function CodigoDorado() {
   const steps = [
@@ -104,9 +105,9 @@ export default function CodigoDorado() {
           {/* 4 Step Process Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {steps.map((st) => (
+              <Reveal key={st.num} className="h-full">
               <div 
-                key={st.num}
-                className="p-5 rounded-2xl bg-amber-50/50 dark:bg-slate-800/80 border border-amber-200/80 dark:border-slate-700 relative overflow-hidden group hover:border-amber-400 transition-colors"
+                className="p-5 rounded-2xl bg-amber-50/50 dark:bg-slate-800/80 border border-amber-200/80 dark:border-slate-700 relative overflow-hidden group hover:border-amber-400 transition-colors h-full"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-2xl font-black text-amber-500 dark:text-amber-400 font-mono">
@@ -119,10 +120,11 @@ export default function CodigoDorado() {
                 <h3 className="font-bold text-slate-900 dark:text-white text-base mb-1.5">
                   {st.title}
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {st.desc}
                 </p>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
